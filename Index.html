@@ -155,7 +155,7 @@ body{
 }
 
 .carrito-icono{
-    background:#00b4a0;
+    background:#0ad6dd;
     padding:10px 20px;
     font-weight:bold;
 }
@@ -595,22 +595,95 @@ Devoluciones y Cambios de compras web
 
 <script>
 
-const productos = [];
+const productos = [
 
-for(let i=1;i<=40;i++){
+/* ================================================= */
+/* CAMISETAS REALES                                   */
+/* ================================================= */
+
+{
+    nombre:"Selección Nigeria",
+    precio:30990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-nigeria.jpg"
+},
+
+{
+    nombre:"Iz Chile",
+    precio:32990,
+    categoria:"poleras",
+    imagen:"imagenes/iz-chile.jpg"
+},
+
+{
+    nombre:"Lazio Italia",
+    precio:34990,
+    categoria:"poleras",
+    imagen:"imagenes/lazio-italia.jpg"
+},
+
+{
+    nombre:"Selección Chilena",
+    precio:36990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-chilena.jpg"
+},
+
+{
+    nombre:"Manchester United",
+    precio:38990,
+    categoria:"poleras",
+    imagen:"imagenes/manchester-united.jpg"
+},
+
+{
+    nombre:"Selección Italia",
+    precio:35990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-italia.jpg"
+},
+
+{
+    nombre:"Boca Juniors",
+    precio:33990,
+    categoria:"poleras",
+    imagen:"imagenes/boca-juniors.jpg"
+},
+
+{
+    nombre:"Selección República Checa",
+    precio:31990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-republica-checa.jpg"
+},
+
+{
+    nombre:"Universidad de Chile",
+    precio:34990,
+    categoria:"poleras",
+    imagen:"imagenes/u-de-chile.jpg"
+}
+
+];
+
+/* ================================================= */
+/* AGREGAR LOS OTROS 31 PRODUCTOS                     */
+/* ================================================= */
+
+for(let i=1;i<=31;i++){
 
     let categoria = "";
 
     if(i<=10){
+
         categoria = "chaquetas";
     }
     else if(i<=20){
-        categoria = "poleras";
-    }
-    else if(i<=30){
+
         categoria = "buzos";
     }
     else{
+
         categoria = "short";
     }
 
@@ -983,3 +1056,4 @@ function mostrarInfo(tipo){
 </body>
 
 </html>
+
