@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tienda Virtual de Fútbol</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#d8f3dc;
+}
+
+/* ================================================= */
+/* POPUP                                             */
+/* ================================================= */
+
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.popup-contenido{
+    background:white;
+    width:90%;
+    max-width:500px;
+    padding:40px;
+    text-align:center;
+    position:relative;
+}
+
+.cerrar{
+    position:absolute;
+    top:10px;
+    right:20px;
+    font-size:35px;
+    cursor:pointer;
+}
+
+.popup h2{
+    margin-bottom:15px;
+}
+
+.popup p{
+    margin-bottom:15px;
+}
+
+.cupon{
+    background:#111;
+    color:white;
+    padding:15px;
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+.popup input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+}
+
+.popup button{
+    width:100%;
+    border-radius:30px;
+    padding:15px;
+    border:none;
+    background:#00b4a0;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* ================================================= */
+/* COMERCIALES                                       */
+/* ================================================= */
+
+.barra-comerciales{
+    width:100%;
+    background:#00b4a0;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.puntos{
+    margin-top:10px;
+}
+
+.punto{
+    width:12px;
+    height:12px;
+    background:white;
+    display:inline-block;
+    margin:0 5px;
+    cursor:pointer;
+    opacity:0.5;
+}
+
+.activo{
+    opacity:1;
+}
+
+/* ================================================= */
+/* MENU                                              */
+/* ================================================= */
+
+.menu{
+    background:#111;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.links{
+    display:flex;
+    gap:25px;
+}
+
+.links a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.links a:hover{
+    color:#00b4a0;
+}
+
+.carrito-icono{
+    background:#0ad6dd;
+    padding:10px 20px;
+    font-weight:bold;
+}
+
+/* ================================================= */
+/* BANNER                                            */
+/* ================================================= */
+
+.banner{
+    width:100%;
+    height:400px;
+    background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.slogan-banner{
+    font-size:40px;
+    font-weight:bold;
+    color:white;
+    background:rgba(0,0,0,0.6);
+    padding:25px 40px;
+    width:70%;
+    line-height:1.4;
+}
+
+/* ================================================= */
+/* CONTENEDOR                                        */
+/* ================================================= */
+
+.contenedor{
+    width:95%;
+    max-width:1600px;
+    margin:auto;
+    padding:40px 0;
+}
+
+/* ================================================= */
+/* PRODUCTOS                                         */
+/* ================================================= */
+
+.productos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.producto{
+    background:white;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:0.3s ease;
+}
+
+.producto:hover{
+    transform:translateY(-6px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.producto img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+.producto:hover img{
+    transform:scale(1.03);
+}
+
+.producto:hover{
+    transform:translateY(-5px);
+}
+
+.producto img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+}
+
+.info{
+    padding:20px;
+    background:#d8f3dc;
+}
+
+.info h3{
+    margin-bottom:10px;
+    text-transform:capitalize;
+}
+
+.precio{
+    color:green;
+    font-size:24px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+button{
+    width:100%;
+    border-radius:30px;
+    padding:14px;
+    border:none;
+    background:#111;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#333;
+}
+
+/* ================================================= */
+/* PAGINACION                                        */
+/* ================================================= */
+
+.paginacion{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:40px;
+}
+
+.pagina-btn{
+    width:auto;
+    padding:12px 25px;
+}
+
+/* ================================================= */
+/* CARRITO                                           */
+/* ================================================= */
+
+.carrito{
+    width:380px;
+    background:#d8f3dc;
+    padding:25px;
+    margin-top:40px;
+    border:2px solid #111;
+}
+
+.item-carrito{
+    margin-bottom:15px;
+}
+
+.acciones{
+    display:flex;
+    gap:5px;
+    margin-top:10px;
+}
+
+.acciones button{
+    width:auto;
+    padding:10px 15px;
+}
+
+.total{
+    margin-top:20px;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.pagar{
+    margin-top:20px;
+    background:green;
+}
+
+/* ================================================= */
+/* AYUDA                                             */
+/* ================================================= */
+
+.ayuda{
+    background:#111;
+    color:white;
+    padding:50px;
+    margin-top:60px;
+}
+
+.ayuda h2{
+    margin-bottom:25px;
+    font-size:30px;
+}
+
+.links-ayuda{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.links-ayuda a{
+    color:#d8f3dc;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.links-ayuda a:hover{
+    color:#00b4a0;
+}
+
+/* ================================================= */
+/* FOOTER                                            */
+/* ================================================= */
+
+footer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================================================= -->
+<!-- POPUP                                             -->
+<!-- ================================================= -->
+
+<div class="popup" id="popup">
+
+<div class="popup-contenido">
+
+<span class="cerrar" onclick="cerrarPopup()">
+×
+</span>
+
+<h2>
+¡Bienvenido a Tienda Virtual de Fútbol!
+</h2>
+
+<p>
+Regístrate y obtén un 15% OFF en tu primera compra
+</p>
+
+<div class="cupon">
+CUPÓN: FUTBOL15
+</div>
+
+<input type="text" placeholder="Nombre">
+<input type="email" placeholder="Correo">
+<input type="text" placeholder="RUT">
+<input type="text" placeholder="Teléfono">
+
+<button onclick="registrarse()">
+Registrarme
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- COMERCIALES                                       -->
+<!-- ================================================= -->
+
+<div class="barra-comerciales">
+
+<div id="textoComercial">
+
+Suscríbete y obtén un 15% de descuento en tu primera compra
+
+</div>
+
+<div class="puntos">
+
+<span class="punto activo" onclick="mostrarComercial(0)"></span>
+
+<span class="punto" onclick="mostrarComercial(1)"></span>
+
+<span class="punto" onclick="mostrarComercial(2)"></span>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- MENU                                              -->
+<!-- ================================================= -->
+
+<div class="menu">
+
+<div class="logo">
+Tienda Virtual de Fútbol
+</div>
+
+<div class="links">
+
+<a onclick="filtrarCategoria('todos')">
+Inicio
+</a>
+
+<a onclick="filtrarCategoria('chaquetas')">
+Chaquetas
+</a>
+
+<a onclick="filtrarCategoria('poleras')">
+Poleras
+</a>
+
+<a onclick="filtrarCategoria('buzos')">
+Buzos
+</a>
+
+<a onclick="filtrarCategoria('short')">
+Short
+</a>
+
+</div>
+
+<div class="carrito-icono">
+
+🛒
+<span id="contador-carrito">
+0
+</span>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- BANNER                                            -->
+<!-- ================================================= -->
+
+<div class="banner">
+
+<p class="slogan-banner">
+
+Escoge tu camiseta favorita y vive la pasión del fútbol
+
+</p>
+
+</div>
+
+<!-- ================================================= -->
+<!-- CONTENEDOR                                        -->
+<!-- ================================================= -->
+
+<div class="contenedor">
+
+<div id="pagina1" class="productos pagina"></div>
+
+<div id="pagina2" class="productos pagina" style="display:none;"></div>
+
+<div id="pagina3" class="productos pagina" style="display:none;"></div>
+
+<div id="pagina4" class="productos pagina" style="display:none;"></div>
+
+<!-- ================================================= -->
+<!-- PAGINACION                                        -->
+<!-- ================================================= -->
+
+<div class="paginacion">
+
+<button class="pagina-btn" onclick="mostrarPagina(1)">
+1
+</button>
+
+<button class="pagina-btn" onclick="mostrarPagina(2)">
+2
+</button>
+
+<button class="pagina-btn" onclick="mostrarPagina(3)">
+3
+</button>
+
+<button class="pagina-btn" onclick="mostrarPagina(4)">
+4
+</button>
+
+</div>
+
+<!-- ================================================= -->
+<!-- CARRITO                                           -->
+<!-- ================================================= -->
+
+<div class="carrito">
+
+<h2>
+Carrito de Compras
+</h2>
+
+<div id="lista-carrito"></div>
+
+<div class="total">
+
+Total:
+$
+<span id="total">
+0
+</span>
+
+</div>
+
+<button class="pagar" onclick="pagar()">
+Proceder al Pago
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- CENTRO DE AYUDA                                   -->
+<!-- ================================================= -->
+
+<div class="ayuda">
+
+<h2>
+Centro de Ayuda
+</h2>
+
+<div class="links-ayuda">
+
+<a onclick="mostrarInfo('seguimiento')">
+Seguimiento Pedido
+</a>
+
+<a onclick="mostrarInfo('devoluciones')">
+Devoluciones, cambios y cancelaciones
+</a>
+
+<a onclick="mostrarInfo('boleta')">
+Revisa tu boleta
+</a>
+
+<a onclick="mostrarInfo('contacto')">
+Contacto
+</a>
+
+<a onclick="mostrarInfo('despacho')">
+Políticas de despacho
+</a>
+
+<a onclick="mostrarInfo('web')">
+Devoluciones y Cambios de compras web
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Tienda Virtual de Fútbol
+
+</footer>
+
+<script>
+
+const productos = [
+
+/* ================================================= */
+/* CAMISETAS REALES                                   */
+/* ================================================= */
+
+{
+    nombre:"Selección Nigeria",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-nigeria.jpeg"
+},
+
+{
+    nombre:"Ivan Zamorano Selección Chile",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/iz-chile.jpeg"
+},
+
+{
+    nombre:"Lazio Italia",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/lazio-italia.jpeg"
+},
+
+{
+    nombre:"Selección Chilena",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-chilena.jpeg"
+},
+
+{
+    nombre:"Manchester United",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/manchester-united.jpeg"
+},
+
+{
+    nombre:"Selección Italia",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-italia.jpeg"
+},
+
+{
+    nombre:"Boca Juniors",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/boca-juniors.jpeg"
+},
+
+{
+    nombre:"Selección República Checa",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-republica-checa.jpeg"
+},
+
+{
+    nombre:"Universidad de Chile",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/u-de-chile.jpeg"
+},
+
+{
+    nombre:"Selección México 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-mexico-2026.jpg"
+},
+
+{
+    nombre:"Colo-Colo Visita 2026",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/colo-colo-visita-2026.jpg"
+},
+
+{
+    nombre:"Selección Argentina Visita 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-argentina-visita-2026.jpg"
+},
+
+{
+    nombre:"Chaqueta Selección Chile",
+    precio:49990,
+    categoria:"poleras",
+    imagen:"imagenes/chaqueta-seleccion-chile.jpg"
+},
+
+{
+    nombre:"Conjunto Niño Selección Chile",
+    precio:27990,
+    categoria:"poleras",
+    imagen:"imagenes/conjunto-niño-seleccion-chilena.jpg"
+},
+
+{
+    nombre:"Chaqueta U de Chile",
+    precio:49990,
+    categoria:"poleras",
+    imagen:"imagenes/chaqueta-u-de-chile.jpg"
+},
+
+{
+    nombre:"Selección Alemania Visita 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-alemania-visita-2026.jpg"
+},
+
+{
+    nombre:"Selección Chile 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-chile-2026.jpg"
+},
+
+{
+    nombre:"Real Madrid Visita 2026",
+    precio:25990,
+    categoria:"poleras",
+    imagen:"imagenes/real-madrid-visita-2026.jpg"
+},
+
+{
+    nombre:"Selección Italia 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-italia-2026.jpg"
+},
+
+{
+    nombre:"Selección Alemania 2026",
+    precio:29990,
+    categoria:"poleras",
+    imagen:"imagenes/seleccion-alemania-2026.jpg"
+},
+
+{
+    nombre:"Chaqueta Colo-Colo",
+    precio:49990,
+    categoria:"poleras",
+    imagen:"imagenes/chaqueta-colo-colo.jpg"
+},
+
+
+
+];
+
+// STOCK INICIAL
+productos.forEach(producto=>{
+    producto.stock={
+        S:15,
+        M:15,
+        L:15,
+        XL:15,
+        XXL:15
+    };
+});
+
+/* ================================================= */
+/* AGREGAR LOS OTROS 31 PRODUCTOS                     */
+/* ================================================= */
+
+for(let i=1;i<=19;i++){
+
+    let categoria = "";
+
+    if(i<=10){
+
+        categoria = "chaquetas";
+    }
+    else if(i<=20){
+
+        categoria = "buzos";
+    }
+    else{
+
+        categoria = "short";
+    }
+
+    productos.push({
+
+        nombre: categoria + " fútbol " + i,
+
+        precio: 39990 + (i*1000),
+
+        categoria: categoria,
+
+        imagen:
+        "https://picsum.photos/400/400?random=" + i,
+        stock:{S:15,M:15,L:15,XL:15,XXL:15}
+    });
+}
+
+function cargarProductos(lista){
+
+    document.getElementById("pagina1").innerHTML = "";
+    document.getElementById("pagina2").innerHTML = "";
+    document.getElementById("pagina3").innerHTML = "";
+    document.getElementById("pagina4").innerHTML = "";
+
+    lista.forEach((producto,index)=>{
+
+        const stockTotal = Object.values(producto.stock).reduce((a,b)=>a+b,0);
+
+        let html = `
+        <div class="producto">
+        <img src="${producto.imagen}">
+        <div class="info">
+        <h3>${producto.nombre}</h3>
+        <p class="precio">$${producto.precio.toLocaleString('es-CL')}</p>
+
+        <p><strong>Stock:</strong> ${stockTotal} unidades</p>
+
+        <select id="talla-${index}" style="width:100%;padding:10px;margin:10px 0;">
+            <option value="S">Talla S</option>
+            <option value="M">Talla M</option>
+            <option value="L">Talla L</option>
+            <option value="XL">Talla XL</option>
+            <option value="XXL">Talla XXL</option>
+        </select>
+
+        <button onclick="agregarCarrito('${producto.nombre}',${producto.precio},document.getElementById('talla-${index}').value)">
+        Comprar
+        </button>
+
+        </div>
+        </div>
+        `;
+
+        if(index < 10){document.getElementById("pagina1").innerHTML += html;}
+        else if(index < 20){document.getElementById("pagina2").innerHTML += html;}
+        else if(index < 30){document.getElementById("pagina3").innerHTML += html;}
+        else{document.getElementById("pagina4").innerHTML += html;}
+    });
+}
+
+cargarProductos(productos);
+
+function filtrarCategoria(categoria){
+
+    if(categoria === "todos"){
+
+        cargarProductos(productos);
+
+        mostrarPagina(1);
+
+        return;
+    }
+
+    let filtrados =
+    productos.filter(
+    producto => producto.categoria === categoria
+    );
+
+    cargarProductos(filtrados);
+
+    mostrarPagina(1);
+}
+
+function mostrarPagina(numero){
+
+    for(let i=1;i<=4;i++){
+        document.getElementById("pagina"+i).style.display = "none";
+    }
+
+    document.getElementById("pagina"+numero).style.display = "grid";
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const comerciales = [
+
+"Suscríbete y obtén un 15% de descuento en tu primera compra",
+
+"Por compras superiores a $49.990 despacho gratis en Santiago",
+
+"Camisetas de Selección con 10% de descuento"
+
+];
+
+let indice = 0;
+
+function mostrarComercial(numero){
+
+    indice = numero;
+
+    document.getElementById("textoComercial").innerText =
+    comerciales[indice];
+
+    actualizarPuntos();
+}
+
+function actualizarPuntos(){
+
+    let puntos = document.querySelectorAll(".punto");
+
+    puntos.forEach((punto,index)=>{
+
+        punto.classList.remove("activo");
+
+        if(index === indice){
+
+            punto.classList.add("activo");
+        }
+
+    });
+}
+
+setInterval(()=>{
+
+    indice++;
+
+    if(indice >= comerciales.length){
+
+        indice = 0;
+    }
+
+    mostrarComercial(indice);
+
+},7000);
+
+function cerrarPopup(){
+
+    document.getElementById("popup").style.display =
+    "none";
+}
+
+function registrarse(){
+
+    alert("Registro exitoso ✅\n\nTu código de descuento es:\n\nFUTBOL15");
+
+    cerrarPopup();
+}
+
+let carrito = [];
+
+let total = 0;
+
+function formatearPrecio(numero){
+
+    return numero.toLocaleString('es-CL');
+}
+
+function agregarCarrito(nombre, precio, talla){
+
+    let productoBase = productos.find(p=>p.nombre===nombre);
+
+    if(productoBase.stock[talla] <= 0){
+        alert('Sin stock disponible para talla '+talla);
+        return;
+    }
+
+    let productoExistente =
+    carrito.find(producto => producto.nombre === nombre && producto.talla===talla);
+
+    if(productoExistente){
+
+        productoExistente.cantidad++;
+
+    }else{
+
+        carrito.push({
+            nombre:nombre,
+            precio:precio,
+            talla:talla,
+            cantidad:1
+        });
+    }
+
+    productoBase.stock[talla]--; actualizarCarrito();
+}
+
+function restarProducto(nombre){
+
+    let producto =
+    carrito.find(producto => producto.nombre === nombre);
+
+    if(producto){
+
+        producto.cantidad--;
+
+        if(producto.cantidad <= 0){
+
+            eliminarProducto(nombre);
+
+            return;
+        }
+    }
+
+    actualizarCarrito();
+}
+
+function eliminarProducto(nombre){
+
+    carrito =
+    carrito.filter(producto => producto.nombre !== nombre);
+
+    actualizarCarrito();
+}
+
+function actualizarCarrito(){
+
+    const lista =
+    document.getElementById("lista-carrito");
+
+    lista.innerHTML = "";
+
+    total = 0;
+
+    let totalProductos = 0;
+
+    carrito.forEach(producto=>{
+
+        let subtotal =
+        producto.precio * producto.cantidad;
+
+        total += subtotal;
+
+        totalProductos += producto.cantidad;
+
+        lista.innerHTML += `
+
+        <div class="item-carrito">
+
+        <strong>
+        ${producto.nombre}
+        </strong>
+
+        <br>
+
+        Cantidad:
+        ${producto.cantidad}
+
+        <br>
+
+        $${formatearPrecio(subtotal)}
+
+        <div class="acciones">
+
+        <button onclick="agregarCarrito('${producto.nombre}',${producto.precio})">
+
+        +
+
+        </button>
+
+        <button onclick="restarProducto('${producto.nombre}')">
+
+        -
+
+        </button>
+
+        <button onclick="eliminarProducto('${producto.nombre}')">
+
+        X
+
+        </button>
+
+        </div>
+
+        </div>
+
+        <hr>
+
+        `;
+    });
+
+    document.getElementById("total").innerText =
+    formatearPrecio(total);
+
+    document.getElementById("contador-carrito").innerText =
+    totalProductos;
+}
+
+
+function actualizarCarrito(){
+
+    const lista=document.getElementById("lista-carrito");
+    lista.innerHTML="";
+    total=0;
+    let totalProductos=0;
+
+    carrito.forEach(producto=>{
+
+        let subtotal=producto.precio*producto.cantidad;
+        total+=subtotal;
+        totalProductos+=producto.cantidad;
+
+        lista.innerHTML += `
+        <div class="item-carrito">
+        <strong>${producto.nombre}</strong><br>
+        Talla: ${producto.talla}<br>
+        Cantidad: ${producto.cantidad}<br>
+        $${formatearPrecio(subtotal)}
+        </div><hr>`;
+    });
+
+    document.getElementById("total").innerText=formatearPrecio(total);
+    document.getElementById("contador-carrito").innerText=totalProductos;
+    cargarProductos(productos);
+}
+
+function pagar(){
+
+    if(carrito.length === 0){
+
+        alert("Tu carrito está vacío");
+
+        return;
+    }
+
+    alert("Aquí conectarás Mercado Pago");
+}
+
+/* ================================================= */
+/* CENTRO DE AYUDA                                   */
+/* ================================================= */
+
+function mostrarInfo(tipo){
+
+    if(tipo === "seguimiento"){
+
+        alert(
+        "SEGUIMIENTO DE PEDIDO\n\nPuedes revisar el estado de tu pedido escribiendo a:\nseguimiento@tiendafutbol.cl"
+        );
+    }
+
+    if(tipo === "devoluciones"){
+
+        alert(
+        "DEVOLUCIONES Y CAMBIOS\n\nTienes hasta 30 días para solicitar cambios o devoluciones."
+        );
+    }
+
+    if(tipo === "boleta"){
+
+        alert(
+        "REVISA TU BOLETA\n\nSolicita tu boleta electrónica escribiendo a:\nboletas@tiendafutbol.cl"
+        );
+    }
+
+    if(tipo === "contacto"){
+
+        alert(
+        "CONTACTO\n\nTienda Virtual de Fútbol\nRut: 76.555.222-1\nTeléfono: +56 9 4455 6677\nCorreo: contacto@tiendafutbol.cl\nDirección: Av. Providencia 1550, Santiago"
+        );
+    }
+
+    if(tipo === "despacho"){
+
+        alert(
+        "POLÍTICAS DE DESPACHO\n\nDespachamos a todo Chile.\nTiempo estimado:\n2 a 5 días hábiles."
+        );
+    }
+
+    if(tipo === "web"){
+
+        alert(
+        "COMPRAS WEB\n\nLas compras web pueden cambiarse dentro de 30 días con boleta."
+        );
+    }
+}
+
+</script>
+
+</body>
+
+</html>
+
